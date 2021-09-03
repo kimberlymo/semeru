@@ -5,7 +5,7 @@ import firebase from "firebase";
  * Diese Konfiguration muss nur einmal in diesem Code programmiert werden
  *
  * @type {{storageBucket: string, apiKey: string, messagingSenderId: string, appId: string, projectId: string, measurementId: string, authDomain: string}}
- * @author Kimberly Moorhouse
+ * @author Kimberly Moorhouse kdkdkdk
  */
 const firebaseConfig = {
     apiKey: "AIzaSyB-FtRRuqWMdiV5iDHiZKfxDNQI5o64qAI",
