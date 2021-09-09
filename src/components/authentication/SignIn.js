@@ -36,7 +36,6 @@ export default function SignIn() {
             .signInWithEmailAndPassword(email, password)
             .then(() => {
                 localStorage.set('email', email);
-                props.history.push('schnellmenu')
             })
             .catch(() => alert("Ihre E-Mail Adresse stimmt nicht überein mit dem Passwort."));
     }
