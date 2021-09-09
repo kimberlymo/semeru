@@ -37,7 +37,7 @@ export default function SignIn() {
             .then(() => {
                 localStorage.set('email', email);
             })
-            .catch(() => alert("Ihre E-Mail Adresse stimmt nicht überein mit dem Passwort."));
+            .catch((e) => alert(e + "Ihre E-Mail Adresse stimmt nicht überein mit dem Passwort."));
     }
 
     return (

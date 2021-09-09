@@ -27,7 +27,8 @@ const formatter = new Formatter();
 export default function FastButtonMenu() {
     const [tasks, setTasks] = useState({values: [], docIds: []});
     const [index, setIndex] = useState(-1);
-    const [workTime, setWorkTime] = useState({from: new Date(), till: new Date()});
+    let from = new Date();
+    let till = new Date();
     const [isActive, setIsActive] = useState(false);
 
     /**
@@ -46,20 +47,21 @@ export default function FastButtonMenu() {
     function activateStopwatch(ind) {
         setIndex(ind);
         setIsActive(!isActive);
+        till = new Date();
 
-        setWorkTime({from: workTime.from, till: new Date()});
         stopwatch.start();
         timer.start();
 
         if (ind === index) setIndex(-1);
 
-        if (isActive) {
-            setWorkTime({from: new Date(), till: new Date()});
-            //akutalisiert alle Daten auf ihre Standartwerte und beschafft neue Daten
-            window.location.reload()
+        if (!isActive) {
+            from = new Date();
+            console.log("hjsjkf")
         }
 
         update(ind);
+        //ladet die Seite neu und die Werte werden wieder neugesetzt.
+        if (isActive) window.location.reload();
     }
 
     /**
@@ -68,12 +70,12 @@ export default function FastButtonMenu() {
      * @param ind
      */
     function update(ind) {
-        let newWorkTime = [workTime];
+        let newWorkTime = [{from: from, till: till}];
         const activeTask = tasks.values[ind];
 
-        if (activeTask.editTime.length > 0) newWorkTime = [...activeTask.editTime, workTime];
+        if (activeTask.editTime.length > 0) newWorkTime = [...activeTask.editTime, newWorkTime[0]];
 
-        firebaseTasks.updateTask(tasks.docIds[ind], activeTask, newWorkTime, activeTask.pause);
+        firebaseTasks.updateTask(tasks.docIds[ind], newWorkTime, activeTask.pause);
     }
 
     return (

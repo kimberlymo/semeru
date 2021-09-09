@@ -20,6 +20,7 @@ const formatter = new Formatter();
  * nimmt die Zeit auf, wie lange der Benutzer arbeitet oder gerade Pause hat.
  * Dabei kann der Benutzer entscheiden bei welcher Tätigkeit er arbeiten möchte
  * Die Zeiten werden noch nicht richtig aufgenommen
+ * TODO: Pausen werden noch nicht richtig gespeichert.
  *
  * @returns {JSX.Element}
  * @constructor
@@ -28,7 +29,11 @@ const formatter = new Formatter();
 export default function RecordTimeForTask() {
     const [tasks, setTasks] = useState({value: [], docIds: []});
     const [index, setIndex] = useState(-1);
-    const [workingTime, setWorkingTime] = useState({from: new Date(), till: new Date()});
+    let till = new Date();
+    let from = new Date();
+    let pauseFrom = null;
+    let pauseTill = null;
+
     const [pause, setPause] = useState({from: new Date(), till: new Date()});
 
     const [isOnBreak, setIsOnBreak] = useState(false);
@@ -46,21 +51,22 @@ export default function RecordTimeForTask() {
     /**
      * startet oder stoppt den Timer und speichert die Daten in die Datenbank.
      * Hier werden die Arbeitszeiten aufgenommen.
-     * BEARBEITEN, DATEN WERDEN KOMISCH GESPEICHERT.
      */
     function validateWorkTime() {
+        till = new Date();
         setIsActive(!isActive);
-        setWorkingTime({from: workingTime.from, till: new Date()});
 
-        if (!isActive) {
-            stopwatch.start();
-            timer.start();
-            setWorkingTime({from: new Date(), till: new Date()});
-        } else {
+        if (isActive) {
             stopwatch.stop();
             stopwatch.reset();
             timer.stop();
             timer.reset();
+            window.location.reload();
+
+        } else {
+            stopwatch.start();
+            timer.start();
+            from = new Date();
         }
         update();
     }
@@ -68,15 +74,17 @@ export default function RecordTimeForTask() {
     /**
      * startet oder stoppt den Timmer und speichert die Daten in die Datenbank
      * Hier werden die Pausen aufgenommen.
+     * TODO: BEARBEITEN, DATEN WERDEN KOMISCH GESPEICHERT, alter useState wird verwendet.
      */
     function validateBreaks() {
         setIsOnBreak(!isOnBreak);
         stopwatch.start();
         timer.start();
-        setPause({from: pause.from, till: new Date()});
+        pauseTill = new Date();
 
         if (!isOnBreak) {
-            setPause({from: new Date(), till: new Date()});
+            pauseFrom = new Date();
+            pauseTill = new Date();
             stopwatch.stop();
             timer.stop();
         }
@@ -92,8 +100,9 @@ export default function RecordTimeForTask() {
         timer.reset();
         setIsActive(false);
         setIndex(index);
-        setWorkingTime({from: new Date(), till: new Date()});
-        setPause({from: new Date(), till: new Date()});
+        till = new Date();
+        pauseTill = new Date();
+        pauseFrom = new Date();
     }
 
     /**
@@ -101,13 +110,21 @@ export default function RecordTimeForTask() {
      * Dabei sollen die vorherigen Arbeitszeiten und Pausen nicht überschrieben.
      */
     function update() {
-        let worktime = [workingTime];
-        let pauses = [pause];
+        let workTime = [{from: from, till: till}];
+        let pauses = [{from: pauseFrom, till: pauseTill}];
+        let task = tasks.value[index];
 
-        if (tasks.value[index].editTime.length > 0) worktime = [...tasks.value[index].editTime, workingTime];
-        if (tasks.value[index].pause.length > 0) pauses = [...tasks.value[index].pause, pause];
-
-        firebaseTasks.updateTask(tasks.docIds[index], tasks.value[index], worktime, pauses);
+        if (task.editTime.length > 0) {
+            [...tasks.value[index].editTime].forEach((time) => {
+                workTime.push({from: new Date(time.from.toMillis()), till: new Date(time.till.toMillis())})
+            });
+        }
+        if (tasks.value[index].pause.length > 0) {
+            [...tasks.value[index].pause].forEach((time) => {
+                pauses.push({from: new Date(time.from.toMillis()), till: new Date(time.till.toMillis())})
+            });
+        }
+        firebaseTasks.updateTask(tasks.docIds[index], workTime, pauses);
     }
 
     return (
@@ -122,7 +139,8 @@ export default function RecordTimeForTask() {
                                    onSelect={() => onSelect(index)}>{formatter.showTask(value)}</Dropdown.Item>)
                 )}
             </DropdownButton>
-            <br/><hr/>
+            <br/>
+            <hr/>
 
             <h6>Vorhandene Zeit: </h6>
             <TimerView
@@ -131,18 +149,17 @@ export default function RecordTimeForTask() {
 
             <br/>
             <Button onClick={validateWorkTime} variant="light"
-                    disabled={(index < 0 || pause.isActive)}>{(isActive) ? "Stopp" : "Start"}
+                    disabled={(index < 0 || isOnBreak)}>{(isActive) ? "Stopp" : "Start"}
             </Button>
 
             <br/><br/>
             <hr/>
 
-            <h6>{"angefangen: " + ((isActive) ? formatter.formatDate(workingTime.from) : 'nicht definiert.')}</h6>
             <p>berechnete Zeit:</p>
             <StopwatchView stopwatch={stopwatch}/>
             <br/>
 
-            <Button className={"col-6"} disabled={(index < 0)} onClick={validateBreaks} variant="light">
+            <Button className="col-6" disabled={(index < 0)} onClick={validateBreaks} variant="light">
                 {(isOnBreak) ? 'weiter' : 'pausieren'}
             </Button>
             <br/><br/>

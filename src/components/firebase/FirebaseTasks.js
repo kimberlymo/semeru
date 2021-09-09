@@ -72,21 +72,17 @@ export default class FirebaseTasks {
      * alle Werte werden angegeben!
      *
      * @param docId
-     * @param task
      * @param workTime
      * @param pause
      */
-    updateTask(docId, task, workTime, pause) {
+    updateTask(docId, workTime, pause) {
+        console.log(workTime)
         db.collection(collectionName).doc(docId).update({
-            name: task.name,
-            plannedFrom: task.plannedFrom,
-            plannedTill: task.plannedTill,
             editTime: workTime,
-            pause: pause,
-            priority: task.priority,
-            user: task.user
+            pause: pause
 
-        }).catch(error => alert("Ein Fehler ist aufgetreten: " + error))
+        }).catch(error => alert("Ein Fehler ist aufgetreten: " + error));
+        //workTime.forEach(time => console.log(time.till));
     }
 
     deleteATask(docId) {
@@ -96,7 +92,7 @@ export default class FirebaseTasks {
     /**
      * beschafft die Daten für die Statistiken, die Zeiten werden hier berechnet und auch zurückgegeben
      * Die Zeiten sind in Stunden berechnet und müssen in den Komponenten formatiert werden.
-     * NOCH IN BEARBEITUNG!!!!
+     * TODO:
      *
      * @param queryShot
      * @param conditionValue: StatisticsValues
