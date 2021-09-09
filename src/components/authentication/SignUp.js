@@ -7,7 +7,7 @@ import FirebaseUsers from "../firebase/FirebaseUsers";
  * Hier kann sich der Benutzer registrieren und sein Konto wird eröffnet.
  * Dazu muss der Benutzer seine Email-Adresse, Vor- und Nachname und Passwort angeben.
  * Das Passwort wird NICHT in die Collection "user" GESPEICHERT!
- * AUSSEHEN NOCH IN BEARBEITUNG
+ * TODO: AUSSEHEN NOCH IN BEARBEITUNG
  *
  * @param props
  * @returns {JSX.Element}

@@ -9,8 +9,7 @@ const firebaseTasks = new FirebaseTasks();
 
 /**
  *
- * NOCH IN BEARBEITUNG:
- * Formatierung der Anzahl Stunden und noch vor diese Woche muss noch implementiert werden
+ * TODO: Formatierung der Anzahl Stunden und noch vor diese Woche muss noch implementiert werden
  *
  * @returns {JSX.Element}
  * @constructor

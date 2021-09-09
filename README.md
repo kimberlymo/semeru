@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Website:
+
+https://kimberlymo.github.io/semeru/
+
 ## Available Scripts
 
 In the project directory, you can run:
