@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/semeru/static/css/main.267b7c8e.chunk.css",
-    "main.js": "/semeru/static/js/main.1b262d04.chunk.js",
-    "main.js.map": "/semeru/static/js/main.1b262d04.chunk.js.map",
-    "runtime-main.js": "/semeru/static/js/runtime-main.b3268eb5.js",
-    "runtime-main.js.map": "/semeru/static/js/runtime-main.b3268eb5.js.map",
-    "static/css/2.c6b9f155.chunk.css": "/semeru/static/css/2.c6b9f155.chunk.css",
-    "static/js/2.e6b7fdcd.chunk.js": "/semeru/static/js/2.e6b7fdcd.chunk.js",
-    "static/js/2.e6b7fdcd.chunk.js.map": "/semeru/static/js/2.e6b7fdcd.chunk.js.map",
-    "static/js/3.b08f9bd9.chunk.js": "/semeru/static/js/3.b08f9bd9.chunk.js",
-    "static/js/3.b08f9bd9.chunk.js.map": "/semeru/static/js/3.b08f9bd9.chunk.js.map",
+    "main.css": "/semeru/static/css/main.fa97d1e8.chunk.css",
+    "main.js": "/semeru/static/js/main.55d1a3c1.chunk.js",
+    "main.js.map": "/semeru/static/js/main.55d1a3c1.chunk.js.map",
+    "runtime-main.js": "/semeru/static/js/runtime-main.480a3512.js",
+    "runtime-main.js.map": "/semeru/static/js/runtime-main.480a3512.js.map",
+    "static/css/2.27107123.chunk.css": "/semeru/static/css/2.27107123.chunk.css",
+    "static/js/2.c4ef5c7d.chunk.js": "/semeru/static/js/2.c4ef5c7d.chunk.js",
+    "static/js/2.c4ef5c7d.chunk.js.map": "/semeru/static/js/2.c4ef5c7d.chunk.js.map",
+    "static/js/3.2abaa5ff.chunk.js": "/semeru/static/js/3.2abaa5ff.chunk.js",
+    "static/js/3.2abaa5ff.chunk.js.map": "/semeru/static/js/3.2abaa5ff.chunk.js.map",
     "index.html": "/semeru/index.html",
-    "static/css/2.c6b9f155.chunk.css.map": "/semeru/static/css/2.c6b9f155.chunk.css.map",
-    "static/css/main.267b7c8e.chunk.css.map": "/semeru/static/css/main.267b7c8e.chunk.css.map",
-    "static/js/2.e6b7fdcd.chunk.js.LICENSE.txt": "/semeru/static/js/2.e6b7fdcd.chunk.js.LICENSE.txt"
+    "static/css/2.27107123.chunk.css.map": "/semeru/static/css/2.27107123.chunk.css.map",
+    "static/css/main.fa97d1e8.chunk.css.map": "/semeru/static/css/main.fa97d1e8.chunk.css.map",
+    "static/js/2.c4ef5c7d.chunk.js.LICENSE.txt": "/semeru/static/js/2.c4ef5c7d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b3268eb5.js",
-    "static/css/2.c6b9f155.chunk.css",
-    "static/js/2.e6b7fdcd.chunk.js",
-    "static/css/main.267b7c8e.chunk.css",
-    "static/js/main.1b262d04.chunk.js"
+    "static/js/runtime-main.480a3512.js",
+    "static/css/2.27107123.chunk.css",
+    "static/js/2.c4ef5c7d.chunk.js",
+    "static/css/main.fa97d1e8.chunk.css",
+    "static/js/main.55d1a3c1.chunk.js"
   ]
 }
