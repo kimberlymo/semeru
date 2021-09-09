@@ -31,8 +31,8 @@ export default function RecordTimeForTask() {
     const [index, setIndex] = useState(-1);
     let till = new Date();
     let from = new Date();
-    let pauseFrom = null;
-    let pauseTill = null;
+    let pauseFrom = new Date();
+    let pauseTill = new Date();
 
     const [pause, setPause] = useState({from: new Date(), till: new Date()});
 

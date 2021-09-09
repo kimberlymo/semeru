@@ -82,7 +82,6 @@ export default class FirebaseTasks {
             pause: pause
 
         }).catch(error => alert("Ein Fehler ist aufgetreten: " + error));
-        //workTime.forEach(time => console.log(time.till));
     }
 
     deleteATask(docId) {
@@ -119,6 +118,8 @@ export default class FirebaseTasks {
                     workTime += ((convertTill - convertFrom) % 86400000) / 3600000;
                 }
             });
+
+            console.log(index)
 
             task.pause.forEach(time => {
                 const convertFrom = new Date(time.from.toMillis());
