@@ -1,6 +1,7 @@
 import {Button, Container, FormControl} from "react-bootstrap";
 import {useState} from "react";
 import FirebaseConnection from "../firebase/FirebaseConnection";
+import {NavLink} from "react-router-dom";
 
 /**
  * Hier kann sich der Benutzer anmelden
@@ -56,7 +57,7 @@ export default function SignIn() {
 
 
             <Button className="col-8" onClick={handleSubmit} variant="secondary">Anmelden</Button><br/><br/>
-            <a href="/registrieren">Kein Konto? Melden Sie sich hier an!</a>
+            <NavLink to="/registrieren">Kein Konto? Melden Sie sich hier an!</NavLink>
         </Container>
     )
 }

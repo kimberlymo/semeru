@@ -1,4 +1,5 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 /**
  * erstellt eine Vorgabe der Website.
@@ -14,13 +15,13 @@ export default function Layout({component}) {
         <Container>
             <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/schnellmenu">Semeru</Navbar.Brand>
+                    <NavLink to="/schnellmenu" className="navbar-brand">Semeru</NavLink>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/statistiken">Statistiken</Nav.Link>
-                            <Nav.Link href="/tätigkeit/erfassen">Zeiten erfassen</Nav.Link>
-                            <Nav.Link href="/tätigkeit/erstellen">Tätigkeit erfassen</Nav.Link>
+                            <NavLink className="nav-link" to="/statistiken">Statistiken</NavLink>
+                            <NavLink className="nav-link" to="/tätigkeit/erfassen">Zeiten erfassen</NavLink>
+                            <NavLink className="nav-link" to="/tätigkeit/erstellen">Tätigkeit erfassen</NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -30,6 +30,7 @@ function App() {
                 <Route path="/schnellmenu"><Layout component={<FastButtonMenu/>}/></Route>
                 <Route path="/tätigkeit/erstellen"><Layout component={<CreateTask/>}/></Route>
                 <Route path="/tätigkeit/erfassen"><Layout component={<RecordTimeForTask/>}/></Route>
+                <Route path="/">404</Route>
             </Switch>
         </div>
     );
