@@ -160,7 +160,7 @@ function returnCondition(conditionValue, till, from) {
         case statisticsValues.today:
             return from.toDateString() === today || till.toDateString() === today;
         case statisticsValues.thisWeek:
-            return from.toDateString() >= currMonday && from.toDateString() <= today;
+            return from.toDateString() >= currMonday || from.toDateString() <= today;
         case statisticsValues.thisMonth:
             return from.getMonth() === new Date().getMonth() || till.getMonth() === new Date().getMonth()
         default:

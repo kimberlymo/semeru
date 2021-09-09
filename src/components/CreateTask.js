@@ -60,7 +60,7 @@ export default function CreateTask() {
             <br/>
 
             <InputGroup>
-                <InputGroup.Prepend className="col-4 col-lg-3">
+                <InputGroup.Prepend className={"col-4 col-lg-3"}>
                     <InputGroup.Text>Tätigkeit</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl value={name} onChange={e => setName(e.target.value)} id={"name"}/>

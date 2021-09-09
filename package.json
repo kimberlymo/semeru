@@ -1,5 +1,5 @@
 {
-  "homepage": "https://kimberlymo.github.io/semeru",
+  "homepage": "https://kimberlymo.github.io/semeru/",
   "name": "semeru-time-boxing",
   "version": "0.1.0",
   "private": true,
@@ -7,11 +7,11 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "firebase": "^8.6.8",
     "json-loader": "^0.5.7",
     "rc-stopwatch": "0.0.5",
-    "react-bootstrap": "^2.0.0-beta.6",
+    "react-bootstrap": "^1.6.1",
     "react-countdown-circle-timer": "^2.5.4",
     "react-scripts": "4.0.3",
     "react-stopwatch-timer": "^1.0.0",
@@ -46,7 +46,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "react": "^17.0.2",
