@@ -76,11 +76,9 @@ export default class FirebaseTasks {
      * @param pause
      */
     updateTask(docId, workTime, pause) {
-        console.log(workTime)
         db.collection(collectionName).doc(docId).update({
             editTime: workTime,
             pause: pause
-
         }).catch(error => alert("Ein Fehler ist aufgetreten: " + error));
     }
 
@@ -89,7 +87,10 @@ export default class FirebaseTasks {
      * @param docId gewählte Tätigkeit
      */
     deleteATask(docId) {
-        db.collection(collectionName).doc(docId).delete().then(() => alert("Ihr Eintrag wurde erfolgreich gelöscht."));
+        db.collection(collectionName).doc(docId).delete().then(() => {
+            alert("Ihr Eintrag wurde erfolgreich gelöscht.");
+            window.location.reload()
+        });
     }
 
     /**
@@ -149,7 +150,7 @@ function returnCondition(conditionValue, till, from) {
         case statisticsValues.today:
             return from.toDateString() === today || till.toDateString() === today;
         case statisticsValues.thisWeek:
-            return from.toDateString() >= currMonday || till.toDateString() >= currMonday;
+            return from.toDateString() >= currMonday || from.toDateString() === today;
         case statisticsValues.thisMonth:
             return from.getMonth() === new Date().getMonth() || till.getMonth() === new Date().getMonth()
         default:

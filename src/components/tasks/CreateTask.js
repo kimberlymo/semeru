@@ -30,7 +30,7 @@ export default function CreateTask() {
         {fn: () => Boolean(priority), message: "Sie müssen eine Priorität setzen"},
         {fn: () => Boolean(from), message: "Sie müssen eine Startzeit setzen"},
         {fn: () => Boolean(till), message: "Sie müssen eine Endzeit setzen"},
-        {fn: () => name.length > 2, message: "Die Tätigkeit muss mind. 3 Buchstaben enthalten"}
+        {fn: () => name.length > 2, message: "Die Tätigkeit muss mind. 3 Buchstaben enthalten"},
     ];
 
     /**
@@ -59,10 +59,10 @@ export default function CreateTask() {
         <Container className="col-10 col-lg-8">
             <motion.div initial={{opacity: 0, scale: 0.9}} animate={{opacity: 1, scale: 1}}
                         transition={{
-                type: "keyframes",
-                stiffness: 200,
-                damping: 20
-            }}>
+                            type: "keyframes",
+                            stiffness: 200,
+                            damping: 20
+                        }}>
                 <h3>Tätigkeit erfassen</h3>
                 <br/>
 

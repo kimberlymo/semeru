@@ -9,7 +9,6 @@ export default function DeleteTask({docId}) {
         const retVal = window.confirm("Sind Sie sich sicher, dass Sie diese Tätigkeit löschen möchten?");
         if (retVal) {
             firebaseTasks.deleteATask(docId);
-            window.location.reload();
         }
     }
 

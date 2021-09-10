@@ -21,11 +21,11 @@ const formatter = new Formatter();
  * nimmt die Zeit auf, wie lange der Benutzer arbeitet oder gerade Pause hat.
  * Dabei kann der Benutzer entscheiden bei welcher Tätigkeit er arbeiten möchte
  * Die Zeiten werden noch nicht richtig aufgenommen
- * TODO: Pausen werden noch nicht richtig gespeichert.
  *
  * @returns {JSX.Element}
  * @constructor
  * @author Kimberly Moorhouse
+ * @status soll jetzt alles funktionieren
  */
 export default function RecordTimeForTask() {
     const [tasks, setTasks] = useState({value: [], docIds: []});
@@ -45,6 +45,7 @@ export default function RecordTimeForTask() {
         db.collection("tasks").get().then(queryShot => {
             setTasks({docIds: firebaseTasks.getDocIdsFromUser(queryShot), value: firebaseTasks.getFromUser(queryShot)})
         });
+        console.log("useEffectt")
     }, []);
 
     /**
@@ -52,6 +53,7 @@ export default function RecordTimeForTask() {
      * Hier werden die Arbeitszeiten aufgenommen.
      */
     function validateWorkTime() {
+
         till = new Date();
         setIsActive(!isActive);
 
@@ -60,13 +62,13 @@ export default function RecordTimeForTask() {
             stopwatch.reset();
             timer.stop();
             timer.reset();
-            window.location.reload();
 
         } else {
             stopwatch.start();
             timer.start();
             from = new Date();
         }
+
         update();
     }
 
@@ -75,6 +77,7 @@ export default function RecordTimeForTask() {
      * Hier werden die Pausen aufgenommen.
      */
     function validateBreaks() {
+        till = new Date();
         setIsOnBreak(!isOnBreak);
         stopwatch.start();
         timer.start();
@@ -85,7 +88,9 @@ export default function RecordTimeForTask() {
             pauseTill = new Date();
             stopwatch.stop();
             timer.stop();
-        }
+
+        } else from = new Date();
+
         update();
     }
 
@@ -122,7 +127,12 @@ export default function RecordTimeForTask() {
                 pauses.push({from: new Date(time.from.toMillis()), till: new Date(time.till.toMillis())})
             });
         }
+
         firebaseTasks.updateTask(tasks.docIds[index], workTime, pauses);
+        //erfrischt die Daten damit keine Fehler entstehen könenn, z. B. Pausen werden gelöscht.
+        db.collection("tasks").get().then(queryShot => {
+            setTasks({docIds: firebaseTasks.getDocIdsFromUser(queryShot), value: firebaseTasks.getFromUser(queryShot)})
+        });
     }
 
     return (
