@@ -33,7 +33,7 @@ export default function FastButtonMenu() {
     let till = new Date();
     const [isActive, setIsActive] = useState(false);
 
-     // beschafft die Tätigkeiten des Benutzers aus der Datenbank, dabei werden auch die DocIDs gespeichert.
+    // beschafft die Tätigkeiten des Benutzers aus der Datenbank, dabei werden auch die DocIDs gespeichert.
     useEffect(() => {
         db.collection("tasks").get().then(queryShot => {
             setTasks({docIds: firebaseTasks.getDocIdsFromUser(queryShot), values: firebaseTasks.getFromUser(queryShot)})
@@ -88,6 +88,9 @@ export default function FastButtonMenu() {
                         }}>
                 <h3>Schnell Menu</h3>
                 <h4>{(index < 0) ? '' : tasks.values[index].name}</h4>
+                <br/>
+                <p>Hier können Sie schnell und eifach Ihre Zeiten erfassen. Dazu müssen Sie nur die gewollte Tätigkeit
+                    auswählen und die Stoppuhr läuft. </p>
                 <br/>
 
                 <h6>berechnete Zeit: </h6>
