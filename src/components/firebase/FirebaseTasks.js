@@ -91,7 +91,7 @@ export default class FirebaseTasks {
     /**
      * beschafft die Daten für die Statistiken, die Zeiten werden hier berechnet und auch zurückgegeben
      * Die Zeiten sind in Stunden berechnet und müssen in den Komponenten formatiert werden.
-     * TODO:
+     * TODO: vielleicht Pausen implementieren, was passiert, wenn kein oder ein Wert enthalten ist?
      *
      * @param queryShot
      * @param conditionValue: StatisticsValues
@@ -106,7 +106,6 @@ export default class FirebaseTasks {
             let saveIndex = -1;
             let workTime = 0;
             let planned = formatter.subtractTimeInHours(task.plannedTill, task.plannedFrom)
-            let pause = 0;
 
             task.editTime.forEach(time => {
                 const convertFrom = new Date(time.from.toMillis());
@@ -121,19 +120,10 @@ export default class FirebaseTasks {
 
             console.log(index)
 
-            task.pause.forEach(time => {
-                const convertFrom = new Date(time.from.toMillis());
-                const convertTill = new Date(time.till.toMillis());
-
-                //sobald die Bedingung stimmt, wird die Zeit hinzugefügt.
-                if (returnCondition(conditionValue, convertTill, convertFrom)) pause += ((convertTill - convertFrom) % 86400000) / 3600000;
-            })
-
             if (saveIndex === index) stats.push({
                 name: data[index].name,
                 worked: workTime,
                 planned: planned,
-                pause: pause
             })
         })
         return stats;
@@ -157,7 +147,7 @@ function returnCondition(conditionValue, till, from) {
         case statisticsValues.today:
             return from.toDateString() === today || till.toDateString() === today;
         case statisticsValues.thisWeek:
-            return from.toDateString() >= currMonday && from.toDateString() <= today;
+            return from.toDateString() >= currMonday || from.toDateString() <= today;
         case statisticsValues.thisMonth:
             return from.getMonth() === new Date().getMonth() || till.getMonth() === new Date().getMonth()
         default:

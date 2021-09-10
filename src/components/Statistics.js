@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import firebase from "firebase";
-import {Button, ButtonGroup, Card, Container, ListGroup} from "react-bootstrap";
+import {Button, ButtonGroup, Container} from "react-bootstrap";
 import FirebaseTasks from "./firebase/FirebaseTasks";
 import statisticsValues from "./StatisticsValues";
 
@@ -9,7 +9,7 @@ const firebaseTasks = new FirebaseTasks();
 
 /**
  *
- * TODO: Formatierung der Anzahl Stunden und noch vor diese Woche muss noch implementiert werden
+ * TODO: Layout erstellen und vielleicht Pausen implementieren
  *
  * @returns {JSX.Element}
  * @constructor
@@ -40,14 +40,23 @@ export default function Statistics() {
             </ButtonGroup>
             <br/><br/>
 
-            {data.map(((value, index) => <div key={index}><Card>
-                <Card.Body>
-                    <Card.Title>{value.name}</Card.Title>
-                </Card.Body>
-                <ListGroup>
-                    <ListGroup.Item>{"gearbeitet: " + convertTime(value.worked)}</ListGroup.Item>
-                </ListGroup>
-            </Card><br/></div>))}
+            {data.map(((value, index) => <div key={index}>
+                <table className="table table-striped">
+                    <thead>
+                    <th>{value.name}</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>gearbeitet</td>
+                        <td>{convertTime(value.worked)}</td>
+                    </tr>
+                    <tr>
+                        <td>eingeplannt</td>
+                        <td>{convertTime(value.planned)}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/></div>))}
         </Container>
     )
 }
