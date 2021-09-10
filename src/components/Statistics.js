@@ -8,7 +8,8 @@ let db = firebase.firestore();
 const firebaseTasks = new FirebaseTasks();
 
 /**
- *
+ * In dieser Komponente werden alle Statistiken des Benutzers angezeigt.
+ * Momentan kann der Benutzer über den heutigen Tag, diese Woche und diesen Monat die Statistiken anschauen
  * TODO: Layout erstellen und vielleicht Pausen implementieren
  *
  * @returns {JSX.Element}
