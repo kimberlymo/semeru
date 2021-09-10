@@ -12,7 +12,7 @@ import {NavLink} from "react-router-dom";
  * @constructor
  * @author Kimberly Moorhouse
  */
-export default function SignIn() {
+export default function SignIn(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const rules = [
@@ -20,11 +20,8 @@ export default function SignIn() {
         {fn: () => password.length > 6, message: "Ihres Passwort muss mindestens 6 Zeichen enthalten"}
     ]
 
-    /**
-     * Hier werden die Daten validiert und es wird kontrolliert, ob dieser User auf die Datenbank zugreifen kann
-     * @param props
-     */
-    function handleSubmit(props) {
+    // Hier werden die Daten validiert und es wird kontrolliert, ob dieser User auf die Datenbank zugreifen kann
+    function handleSubmit() {
         const failures = rules.filter(r => !r.fn());
 
         if (failures.length) {
