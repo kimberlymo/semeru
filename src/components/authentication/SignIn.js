@@ -35,7 +35,7 @@ export default function SignIn() {
         FirebaseConnection.auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
-                localStorage.set('email', email);
+                localStorage.setItem('email', email);
             })
             .catch((e) => alert(e + "Ihre E-Mail Adresse stimmt nicht überein mit dem Passwort."));
     }
