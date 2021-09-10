@@ -7,7 +7,7 @@
 const prioritiy = {
     high: 'hoch',
     normal: 'normal',
-    low: 'tief'
+    low: 'niedrig'
 }
 
 export default prioritiy;

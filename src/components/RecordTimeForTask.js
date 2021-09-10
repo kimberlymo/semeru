@@ -34,8 +34,6 @@ export default function RecordTimeForTask() {
     let pauseFrom = new Date();
     let pauseTill = new Date();
 
-    const [pause, setPause] = useState({from: new Date(), till: new Date()});
-
     const [isOnBreak, setIsOnBreak] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
@@ -74,7 +72,6 @@ export default function RecordTimeForTask() {
     /**
      * startet oder stoppt den Timmer und speichert die Daten in die Datenbank
      * Hier werden die Pausen aufgenommen.
-     * TODO: BEARBEITEN, DATEN WERDEN KOMISCH GESPEICHERT, alter useState wird verwendet.
      */
     function validateBreaks() {
         setIsOnBreak(!isOnBreak);

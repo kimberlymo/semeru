@@ -100,7 +100,6 @@ export default class FirebaseTasks {
         let data = this.getFromUser(queryShot);
         let stats = [];
 
-
         data.forEach((task, index) => {
             let saveIndex = -1;
             let workTime = 0;
@@ -117,6 +116,7 @@ export default class FirebaseTasks {
                 }
             });
 
+            //filtiert die Daten heraus, die keine Arbeitszeit haben.
             if (saveIndex === index) stats.push({
                 name: data[index].name,
                 worked: workTime,
@@ -139,13 +139,12 @@ export default class FirebaseTasks {
 function returnCondition(conditionValue, till, from) {
     const today = new Date().toDateString();
     const currMonday = new Date(new Date().setDate(new Date().getDate() - new Date().getDay() + 1)).toDateString();
-    console.log(from.toDateString() >= currMonday && from.toDateString() <= today)
 
     switch (conditionValue) {
         case statisticsValues.today:
             return from.toDateString() === today || till.toDateString() === today;
         case statisticsValues.thisWeek:
-            return from.toDateString() >= currMonday;
+            return from.toDateString() >= currMonday || till.toDateString() >= currMonday;
         case statisticsValues.thisMonth:
             return from.getMonth() === new Date().getMonth() || till.getMonth() === new Date().getMonth()
         default:

@@ -91,9 +91,9 @@ export default function CreateTask() {
                 <label className="col-4 col-lg-3 offset-lg-2">Priorität: </label>
                 <DropdownButton id="dropdown-basic-button" className="col-3" variant="light"
                                 title={(Boolean(priority)) ? priority : 'Bitte etwas auswählen'}>
-                    <Dropdown.Item onSelect={() => setPriority(Priority.high)}>hoch</Dropdown.Item>
-                    <Dropdown.Item onSelect={() => setPriority(Priority.normal)}>normal</Dropdown.Item>
-                    <Dropdown.Item onSelect={() => setPriority(Priority.low)}>niedrig</Dropdown.Item>
+                    <Dropdown.Item onSelect={() => setPriority(Priority.high)}>{Priority.high}</Dropdown.Item>
+                    <Dropdown.Item onSelect={() => setPriority(Priority.normal)}>{Priority.normal}</Dropdown.Item>
+                    <Dropdown.Item onSelect={() => setPriority(Priority.low)}>{Priority.low}</Dropdown.Item>
                 </DropdownButton>
             </Row>
 
