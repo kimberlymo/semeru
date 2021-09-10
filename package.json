@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.1.0",
     "firebase": "^8.6.8",
+    "framer-motion": "^4.1.17",
     "json-loader": "^0.5.7",
     "rc-stopwatch": "0.0.5",
     "react-bootstrap": "^1.6.1",

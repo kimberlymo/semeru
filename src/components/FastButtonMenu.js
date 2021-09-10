@@ -5,6 +5,7 @@ import FirebaseTasks from "./firebase/FirebaseTasks";
 import Formatter from "./Formatter";
 import StopwatchView from "./timers/StopwatchView";
 import TimerView from "./timers/TimerView";
+import {motion} from "framer-motion";
 
 //wird gebracht für den Timer und Stoppuhr
 let Stopwatch = require('timer-stopwatch')
@@ -96,13 +97,20 @@ export default function FastButtonMenu() {
             <hr/>
 
             {tasks.values.map(((value, ind) =>
-                <div key={'tasks' + ind}>
+                <motion.div key={'tasks' + ind} initial={{scale: 0, rotate: -90}}
+                            animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.05, rotate: 0}}
+                            whileTap={{scale: 1.05, rotate: 0}}
+                            transition={{
+                                type: "spring",
+                                stiffness: 260,
+                                damping: 20
+                            }}>
+
                     <Button onClick={() => activateStopwatch(ind)} className="col-8" active={ind === index}
                             variant="outline-secondary">
                         {formatter.showTask(value)}
                     </Button><br/><br/>
-                </div>))}
-
+                </motion.div>))}
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import firebase from "firebase";
-import {Button, ButtonGroup, Container} from "react-bootstrap";
+import {ButtonGroup, Container} from "react-bootstrap";
 import FirebaseTasks from "./firebase/FirebaseTasks";
 import statisticsValues from "./StatisticsValues";
+import {motion} from "framer-motion"
 
 let db = firebase.firestore();
 const firebaseTasks = new FirebaseTasks();
@@ -35,16 +36,21 @@ export default function Statistics() {
             <ButtonGroup className="me-2">
                 {[statisticsValues.today, statisticsValues.thisWeek, statisticsValues.thisMonth]
                     .map(((value, index) =>
-                        <Button key={'stats-' + index} onClick={() => setSelectedStat(value)}
-                                variant="outline-secondary" active={value === selectedStat}>
-                            {value}</Button>))}
+                        <motion.button key={'stats-' + index} onClick={() => setSelectedStat(value)}
+                                       variant="outline-secondary" active={value === selectedStat}
+                                       initial={{scale: 1.3, rotate: 180}} className="btn btn-outline-secondary"
+                                       animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.1, rotate: 2}}
+                                       transition={{type: "spring", stiffness: 260, damping: 20}}>
+                            {value}</motion.button>))}
             </ButtonGroup>
             <br/><br/>
 
-            {data.map(((value, index) => <div key={index}>
+            {data.map(((value, index) => <motion.div key={index} whileHover={{scale: 1.1, rotate: 0}}>
                 <table className="table table-striped">
                     <thead>
-                    <th>{value.name}</th>
+                    <tr>
+                        <th>{value.name}</th>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
@@ -57,7 +63,7 @@ export default function Statistics() {
                     </tr>
                     </tbody>
                 </table>
-                <br/></div>))}
+                <br/></motion.div>))}
         </Container>
     )
 }

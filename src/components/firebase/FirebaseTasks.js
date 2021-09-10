@@ -91,7 +91,6 @@ export default class FirebaseTasks {
     /**
      * beschafft die Daten für die Statistiken, die Zeiten werden hier berechnet und auch zurückgegeben
      * Die Zeiten sind in Stunden berechnet und müssen in den Komponenten formatiert werden.
-     * TODO: vielleicht Pausen implementieren, was passiert, wenn kein oder ein Wert enthalten ist?
      *
      * @param queryShot
      * @param conditionValue: StatisticsValues
@@ -118,8 +117,6 @@ export default class FirebaseTasks {
                 }
             });
 
-            console.log(index)
-
             if (saveIndex === index) stats.push({
                 name: data[index].name,
                 worked: workTime,
@@ -142,12 +139,13 @@ export default class FirebaseTasks {
 function returnCondition(conditionValue, till, from) {
     const today = new Date().toDateString();
     const currMonday = new Date(new Date().setDate(new Date().getDate() - new Date().getDay() + 1)).toDateString();
+    console.log(from.toDateString() >= currMonday && from.toDateString() <= today)
 
     switch (conditionValue) {
         case statisticsValues.today:
             return from.toDateString() === today || till.toDateString() === today;
         case statisticsValues.thisWeek:
-            return from.toDateString() >= currMonday || from.toDateString() <= today;
+            return from.toDateString() >= currMonday;
         case statisticsValues.thisMonth:
             return from.getMonth() === new Date().getMonth() || till.getMonth() === new Date().getMonth()
         default:
