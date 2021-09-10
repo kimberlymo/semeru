@@ -38,7 +38,7 @@ export default function Statistics() {
                     .map(((value, index) =>
                         <motion.button key={'stats-' + index} onClick={() => setSelectedStat(value)}
                                        className={"btn btn-outline-secondary " + ((selectedStat === value) ? "active" : "")}
-                                       initial={{scale: 1.3, rotate: 180}}
+                                       initial={{scale: 1.3, rotate: 10}}
                                        animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.1, rotate: 2}}
                                        whileTap={{scale: 1.1, rotate: 2}}
                                        transition={{type: "spring", stiffness: 260, damping: 20}}>

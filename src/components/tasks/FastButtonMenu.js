@@ -33,9 +33,7 @@ export default function FastButtonMenu() {
     let till = new Date();
     const [isActive, setIsActive] = useState(false);
 
-    /**
-     * beschafft die Tätigkeiten des Benutzers aus der Datenbank, dabei werden auch die DocIDs gespeichert.
-     */
+     // beschafft die Tätigkeiten des Benutzers aus der Datenbank, dabei werden auch die DocIDs gespeichert.
     useEffect(() => {
         db.collection("tasks").get().then(queryShot => {
             setTasks({docIds: firebaseTasks.getDocIdsFromUser(queryShot), values: firebaseTasks.getFromUser(queryShot)})
@@ -104,7 +102,7 @@ export default function FastButtonMenu() {
                 <hr/>
 
                 {tasks.values.map(((value, ind) =>
-                    <motion.div key={'tasks' + ind} initial={{scale: 0, rotate: -90}}
+                    <motion.div key={'tasks' + ind} initial={{scale: 0, rotate: -10}}
                                 animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.05, rotate: 0}}
                                 whileTap={{scale: 1.05, rotate: 0}}
                                 transition={{
