@@ -84,8 +84,12 @@ export default class FirebaseTasks {
         }).catch(error => alert("Ein Fehler ist aufgetreten: " + error));
     }
 
+    /**
+     * Sobald diese Methode aufgerufen wird, wird die ausgewählte Tätigkeit gelöscht
+     * @param docId gewählte Tätigkeit
+     */
     deleteATask(docId) {
-        db.collection(collectionName).doc(docId).delete().then(() => alert("Ihr Eintrag wurde erfolgreich gelöscht."))
+        db.collection(collectionName).doc(docId).delete().then(() => alert("Ihr Eintrag wurde erfolgreich gelöscht."));
     }
 
     /**
@@ -103,7 +107,7 @@ export default class FirebaseTasks {
         data.forEach((task, index) => {
             let saveIndex = -1;
             let workTime = 0;
-            let planned = formatter.subtractTimeInHours(task.plannedTill, task.plannedFrom)
+            let planned = formatter.subtractTimeInHours(task.plannedTill, task.plannedFrom);
 
             task.editTime.forEach(time => {
                 const convertFrom = new Date(time.from.toMillis());
@@ -111,7 +115,7 @@ export default class FirebaseTasks {
 
                 //sobald die Bedingung stimmt, wird die Zeit hinzugefügt.
                 if (returnCondition(conditionValue, convertTill, convertFrom)) {
-                    saveIndex = index
+                    saveIndex = index;
                     workTime += ((convertTill - convertFrom) % 86400000) / 3600000;
                 }
             });
@@ -121,8 +125,9 @@ export default class FirebaseTasks {
                 name: data[index].name,
                 worked: workTime,
                 planned: planned,
-            })
-        })
+            });
+        });
+
         return stats;
     }
 }

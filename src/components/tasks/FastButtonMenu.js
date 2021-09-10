@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import firebase from "firebase";
-import {Button} from "react-bootstrap";
-import FirebaseTasks from "./firebase/FirebaseTasks";
-import Formatter from "./Formatter";
-import StopwatchView from "./timers/StopwatchView";
-import TimerView from "./timers/TimerView";
+import {Button, Container} from "react-bootstrap";
+import FirebaseTasks from "../firebase/FirebaseTasks";
+import Formatter from "../Formatter";
+import StopwatchView from "../timers/StopwatchView";
+import TimerView from "../timers/TimerView";
 import {motion} from "framer-motion";
+import DeleteTask from "./DeleteTask";
 
 //wird gebracht für den Timer und Stoppuhr
 let Stopwatch = require('timer-stopwatch')
@@ -80,37 +81,45 @@ export default function FastButtonMenu() {
     }
 
     return (
-        <div>
-            <h3>Schnell Menu</h3>
-            <h4>{(index < 0) ? '' : tasks.values[index].name}</h4>
-            <br/>
+        <Container className="col-11 col-lg-8">
+            <motion.div initial={{opacity: 0, scale: 0.9}} animate={{opacity: 1, scale: 1}}
+                        transition={{
+                            type: "keyframes",
+                            stiffness: 200,
+                            damping: 20
+                        }}>
+                <h3>Schnell Menu</h3>
+                <h4>{(index < 0) ? '' : tasks.values[index].name}</h4>
+                <br/>
 
-            <h6>berechnete Zeit: </h6>
-            <StopwatchView stopwatch={stopwatch}/>
+                <h6>berechnete Zeit: </h6>
+                <StopwatchView stopwatch={stopwatch}/>
 
-            <br/>
-            <h6>verfügbare Zeit:</h6>
-            <TimerView
-                startValue={(index < 0) ? 0 : formatter.getDateFromHours(tasks.values[index].plannedTill) - formatter.getDateFromHours(tasks.values[index].plannedFrom)}
-                timer={timer}/>
-            <br/>
-            <hr/>
+                <br/>
+                <h6>verfügbare Zeit:</h6>
+                <TimerView
+                    startValue={(index < 0) ? 0 : formatter.getDateFromHours(tasks.values[index].plannedTill) - formatter.getDateFromHours(tasks.values[index].plannedFrom)}
+                    timer={timer}/>
+                <br/>
+                <hr/>
 
-            {tasks.values.map(((value, ind) =>
-                <motion.div key={'tasks' + ind} initial={{scale: 0, rotate: -90}}
-                            animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.05, rotate: 0}}
-                            whileTap={{scale: 1.05, rotate: 0}}
-                            transition={{
-                                type: "spring",
-                                stiffness: 260,
-                                damping: 20
-                            }}>
+                {tasks.values.map(((value, ind) =>
+                    <motion.div key={'tasks' + ind} initial={{scale: 0, rotate: -90}}
+                                animate={{rotate: 0, scale: 1}} whileHover={{scale: 1.05, rotate: 0}}
+                                whileTap={{scale: 1.05, rotate: 0}}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 20
+                                }}>
 
-                    <Button onClick={() => activateStopwatch(ind)} className="col-8" active={ind === index}
-                            variant="outline-secondary">
-                        {formatter.showTask(value)}
-                    </Button><br/><br/>
-                </motion.div>))}
-        </div>
+                        <Button onClick={() => activateStopwatch(ind)} className="col-8" active={ind === index}
+                                variant="outline-secondary">
+                            {formatter.showTask(value)}
+                        </Button> <DeleteTask docId={tasks.docIds[ind]}/>
+                        <br/><br/>
+                    </motion.div>))}
+            </motion.div>
+        </Container>
     )
 }

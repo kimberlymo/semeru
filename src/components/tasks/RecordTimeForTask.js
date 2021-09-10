@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {Button, Container, Dropdown, DropdownButton} from "react-bootstrap";
 import firebase from "firebase";
-import FirebaseTasks from "./firebase/FirebaseTasks";
-import Formatter from "./Formatter";
-import StopwatchView from "./timers/StopwatchView";
-import TimerView from "./timers/TimerView";
+import {motion} from "framer-motion";
+import FirebaseTasks from "../firebase/FirebaseTasks";
+import Formatter from "../Formatter";
+import StopwatchView from "../timers/StopwatchView";
+import TimerView from "../timers/TimerView";
 
 
 //werden für den Timer und auch für die Stoppuhr gebraucht.
@@ -126,40 +127,47 @@ export default function RecordTimeForTask() {
 
     return (
         <Container className="col-11 col-lg-8">
-            <h3>Zeiten erfassen</h3>
-            <br/>
+            <motion.div initial={{opacity: 0, scale: 0.9}} animate={{opacity: 1, scale: 1}}
+                        transition={{
+                            type: "keyframes",
+                            stiffness: 200,
+                            damping: 20
+                        }}>
+                <h3>Zeiten erfassen</h3>
+                <br/>
 
-            <DropdownButton title={(index >= 0) ? formatter.showTask(tasks.value[index]) : "Bitte etwas auswählen"}
-                            variant='warning'>
-                {tasks.value.map(((value, index) =>
-                    <Dropdown.Item key={'tasks' + index}
-                                   onSelect={() => onSelect(index)}>{formatter.showTask(value)}</Dropdown.Item>)
-                )}
-            </DropdownButton>
-            <br/>
-            <hr/>
+                <DropdownButton title={(index >= 0) ? formatter.showTask(tasks.value[index]) : "Bitte etwas auswählen"}
+                                variant='warning'>
+                    {tasks.value.map(((value, index) =>
+                        <Dropdown.Item key={'tasks' + index}
+                                       onSelect={() => onSelect(index)}>{formatter.showTask(value)}</Dropdown.Item>)
+                    )}
+                </DropdownButton>
+                <br/>
+                <hr/>
 
-            <h6>Vorhandene Zeit: </h6>
-            <TimerView
-                startValue={(index < 0) ? 0 : formatter.getDateFromHours(tasks.value[index].plannedTill) - formatter.getDateFromHours(tasks.value[index].plannedFrom)}
-                timer={timer}/>
+                <h6>Vorhandene Zeit: </h6>
+                <TimerView
+                    startValue={(index < 0) ? 0 : formatter.getDateFromHours(tasks.value[index].plannedTill) - formatter.getDateFromHours(tasks.value[index].plannedFrom)}
+                    timer={timer}/>
 
-            <br/>
-            <Button onClick={validateWorkTime} variant="light"
-                    disabled={(index < 0 || isOnBreak)}>{(isActive) ? "Stopp" : "Start"}
-            </Button>
+                <br/>
+                <Button onClick={validateWorkTime} variant="light"
+                        disabled={(index < 0 || isOnBreak)}>{(isActive) ? "Stopp" : "Start"}
+                </Button>
 
-            <br/><br/>
-            <hr/>
+                <br/><br/>
+                <hr/>
 
-            <p>berechnete Zeit:</p>
-            <StopwatchView stopwatch={stopwatch}/>
-            <br/>
+                <p>berechnete Zeit:</p>
+                <StopwatchView stopwatch={stopwatch}/>
+                <br/>
 
-            <Button className="col-6" disabled={(index < 0)} onClick={validateBreaks} variant="light">
-                {(isOnBreak) ? 'weiter' : 'pausieren'}
-            </Button>
-            <br/><br/>
+                <Button className="col-6" disabled={(index < 0)} onClick={validateBreaks} variant="light">
+                    {(isOnBreak) ? 'weiter' : 'pausieren'}
+                </Button>
+                <br/><br/>
+            </motion.div>
         </Container>
     )
 }
